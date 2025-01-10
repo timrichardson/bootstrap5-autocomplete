@@ -1,0 +1,34 @@
+name: Build and Minify JavaScript
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+  pull_request:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'  # Specify the Node.js version you want to use
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build and minify JavaScript
+      run: npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/  # Adjust this path to match where your build outputs are located
