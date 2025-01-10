@@ -1256,20 +1256,27 @@ class Autocomplete {
     if (this._config.noCache) {
       params.t = Date.now();
     }
-    // We have a related field
+    // We have a related field or an array of related fields
     if (params.related) {
-      /**
-       * @type {HTMLInputElement}
-       */
-      //@ts-ignore
-      const input = document.getElementById(params.related);
-      if (input) {
-        params.related = input.value;
-        const inputName = input.getAttribute("name");
-        if (inputName) {
-          params[inputName] = input.value;
+      // Check if params.related is an array
+      const relatedItems = Array.isArray(params.related) ? params.related : [params.related];
+    
+      relatedItems.forEach((related) => {
+        /**
+         * @type {HTMLInputElement}
+         */
+        //@ts-ignore
+        const input = document.getElementById(related);
+        if (input) {
+          const inputValue = input.value;
+          const inputName = input.getAttribute("name");
+    
+          // Update params with the input value
+          if (inputName) {
+            params[inputName] = inputValue;
+          }
         }
-      }
+      });
     }
 
     const urlParams = new URLSearchParams(params);
