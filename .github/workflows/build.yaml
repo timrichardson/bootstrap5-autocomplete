@@ -32,3 +32,4 @@ jobs:
       with:
         name: minified-js
         path: autocomplete.min.js
+
