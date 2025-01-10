@@ -1,6 +1,7 @@
 name: Minify JavaScript
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - timrichardson-patch-1  # Change this to your default branch
