@@ -1,12 +1,12 @@
-name: Build and Minify JavaScript
+name: Minify JavaScript
 
 on:
   push:
     branches:
-      - timrichardson-patch-1  # Change this to your default branch
+      - tim-richardson-patch-1  # Change this to your default branch
   pull_request:
     branches:
-      - timrichardson-patch-1  # Change this to your default branch
+      - tim-richardson-patch-1   # Change this to your default branch
 
 jobs:
   build:
@@ -21,14 +21,14 @@ jobs:
       with:
         node-version: '16'  # Specify the Node.js version you want to use
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install Terser
+      run: npm install --save-dev terser
 
-    - name: Build and minify JavaScript
-      run: npm run build
+    - name: Minify JavaScript
+      run: npx terser autocomplete.js -o autocomplete.min.js
 
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
-        name: dist
-        path: dist/  # Adjust this path to match where your build outputs are located
+        name: minified-js
+        path: autocomplete.min.js
