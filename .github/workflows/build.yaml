@@ -24,12 +24,27 @@ jobs:
     - name: Install Terser
       run: npm install --save-dev terser
 
-    - name: Minify JavaScript
-      run: npx terser autocomplete.js -o autocomplete.min.js
+    - name: Copy original JavaScript to dist
+      run: mkdir -p dist && cp autocomplete.js dist/autocomplete.js
 
-    - name: Upload artifact
+    - name: Minify JavaScript
+      run: npx terser autocomplete.js -o dist/autocomplete.min.js --source-map "content=inline" --source-map "url=dist/autocomplete.min.js.map"
+    
+    - name: Upload original JavaScript
       uses: actions/upload-artifact@v3
       with:
-        name: minified-js
-        path: autocomplete.min.js
+        name: autocomplete.js
+        path: dist/autocomplete.js
+    
+    - name: Upload minified JavaScript
+      uses: actions/upload-artifact@v3
+      with:
+        name: autocomplete.min.js
+        path: dist/autocomplete.min.js
+
+    - name: Upload source map
+      uses: actions/upload-artifact@v3
+      with:
+        name: autocomplete.min.js.map
+        path: dist/autocomplete.min.js.map
 
