@@ -80,7 +80,7 @@
  * @property {String} datalist The id of the source datalist
  * @property {String} server Endpoint for data provider
  * @property {String} serverMethod HTTP request method for data provider, default is GET
- * @property {String|Object} serverParams Parameters to pass along to the server. You can specify a "related" key with the id of a related field.
+ * @property {String|Object} serverParams Parameters to pass along to the server.  You can specify a "related" key with (a) the id of a related field or (b) an array of related field ids.
  * @property {String} serverDataKey By default: data
  * @property {Object} fetchOptions Any other fetch options (https://developer.mozilla.org/en-US/docs/Web/API/fetch#syntax)
  * @property {Boolean} liveServer Should the endpoint be called each time on input
