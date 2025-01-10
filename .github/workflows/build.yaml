@@ -49,3 +49,18 @@ jobs:
         name: autocomplete.min.js.map
         path: dist/autocomplete.min.js.map
 
+    - name: Create or Update Beta Release
+      id: create_or_update_release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: beta
+        release_name: Beta
+        draft: false
+        prerelease: true
+        files: |
+          dist/autocomplete.js
+          dist/autocomplete.min.js
+          dist/autocomplete.min.js.map
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
